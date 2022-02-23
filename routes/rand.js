@@ -13,7 +13,7 @@ export default async function get(fastify, opts) {
     }
   }
 
-  fastify.get('/rand', routeOpts, handler)
+  fastify.get('/rand/', routeOpts, handler)
 
   async function handler(req, reply) {
     const { id } = req.query;

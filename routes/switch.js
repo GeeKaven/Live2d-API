@@ -13,7 +13,7 @@ export default async function get(fastify, opts) {
     }
   }
 
-  fastify.get('/switch', routeOpts, handler)
+  fastify.get('/switch/', routeOpts, handler)
 
   async function handler(req, reply) {
     const { id } = req.query;

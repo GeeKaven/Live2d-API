@@ -14,19 +14,19 @@ export default async function get(fastify, opts) {
 		}
 	}
 
-	fastify.get('/get', routeOpts, handler)
+	fastify.get('/get/', routeOpts, handler)
 
 	async function handler(req, reply) {
 		const { id } = req.query;
-		let modelId = id.split('-')[0];
-		let modelTexturesId =  id.split('-')[1] ? id.split('-')[1] : 0;
-		
+		let modelId = parseInt(id.split('-')[0])
+		let modelTexturesId = parseInt(id.split('-')[1] ? id.split('-')[1] : 0)
+
 		let json = {}
 		const modelList = await getModelList();
 		let modelName = modelIdToName(modelList, modelId);
 
 		if (Array.isArray(modelName)) {
-			modelName = modelTexturesId > 0 && modelTexturesId <= modelName.length ? modelName[modelTexturesId - 1] : modelName[0];
+			modelName = modelTexturesId > 0 && modelTexturesId <= modelName.length ? modelName[modelTexturesId - 1] : modelName[0]
 			json = JSON.parse(
 				await readFile(
 					new URL(`../model/${modelName}/index.json`, import.meta.url),
@@ -39,9 +39,9 @@ export default async function get(fastify, opts) {
 				)
 			)
 			if (modelTexturesId > 0) {
-				const modelTexturesName = await getModelTexturesName(modelName, modelTexturesId);
+				const modelTexturesName = await getModelTexturesName(modelName, modelTexturesId)
 				if (modelTexturesName) {
-					json['textures'] = Array.isArray(modelTexturesName) ? modelTexturesName : [modelTexturesName];
+					json['textures'] = Array.isArray(modelTexturesName) ? modelTexturesName : [modelTexturesName]
 				}
 			}
 		}

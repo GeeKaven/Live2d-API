@@ -13,32 +13,28 @@ export default async function get(fastify, opts) {
     }
   }
 
-  fastify.get('/rand_textures/', routeOpts, handler)
+  fastify.get('/switch_textures/', routeOpts, handler)
 
   async function handler(req, reply) {
     const { id } = req.query;
-		let modelId = parseInt(id.split('-')[0])
-		let modelTexturesId =  parseInt((id.split('-')[1] ? id.split('-')[1] : 0))
+    let modelId = parseInt(id.split('-')[0])
+    let modelTexturesId = parseInt(id.split('-')[1] ? id.split('-')[1] : 0);
+    console.log(modelTexturesId)
 
     const modelList = await getModelList()
     let modelName = modelIdToName(modelList, modelId)
 
     const modelTexturesList = Array.isArray(modelName) ? modelName : await getModelTexturesList(modelName)
-
-    let modelTexturesNewId = 1
-    if (modelTexturesList.length > 1) {
-      let modelTexturesGenNewId = true
-      if (modelTexturesId == 0) modelTexturesId = 1
-      while (modelTexturesGenNewId) {
-        modelTexturesNewId = Math.floor(Math.random() * modelTexturesList.length) + 1
-        modelTexturesGenNewId = modelTexturesNewId == modelTexturesId ? true : false;
-      }
+    let modelTexturesNewId = modelTexturesId == 0 ? 2 : modelTexturesId + 1
+    console.log(modelTexturesNewId)
+    if (modelTexturesNewId > modelTexturesList.length) {
+      modelTexturesNewId = 1
     }
 
     reply.send(
       {
-        textures : {
-          id : modelTexturesNewId,
+        textures: {
+          id: modelTexturesNewId,
           name: modelTexturesList[modelTexturesNewId - 1],
           model: Array.isArray(modelName) ? modelName[modelTexturesNewId - 1] : modelName
         }
