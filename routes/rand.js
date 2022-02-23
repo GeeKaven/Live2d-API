@@ -27,9 +27,11 @@ export default async function get(fastify, opts) {
 
     reply.send(
       {
-        id: modelRandId,
-        name: modelList['models'][modelRandId - 1],
-        message: modelList['messages'][modelRandId - 1]
+        model: {
+          id: modelRandId,
+          name: modelList['models'][modelRandId - 1],
+          message: modelList['messages'][modelRandId - 1]
+        }
       })
   }
 
