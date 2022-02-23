@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js"
+    "local:start": "fastify start -l info app.js",
+    "local:dev": "fastify start -w -l info -P app.js"
   },
   "repository": {
     "type": "git",
