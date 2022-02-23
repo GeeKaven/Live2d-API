@@ -25,7 +25,8 @@
   "dependencies": {
     "fastify": "^3.27.1",
     "fastify-autoload": "^3.11.0",
-    "fastify-cli": "^2.15.0"
+    "fastify-cli": "^2.15.0",
+    "fastify-cors": "^6.0.3"
   },
   "devDependencies": {
     "tap": "^15.1.6"
