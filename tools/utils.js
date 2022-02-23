@@ -54,4 +54,4 @@ async function getTextures(modelName) {
   return []
 }
 
-export { getModelList, modelIdToName, getModelTexturesName }
+export { getModelList, modelIdToName, getModelTexturesName, getModelTexturesList }
