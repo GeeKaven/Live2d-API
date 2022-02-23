@@ -21,11 +21,9 @@ export default async function get(fastify, opts) {
 		let modelId = id.split('-')[0];
 		let modelTexturesId =  id.split('-')[1] ? id.split('-')[1] : 0;
 		
-		console.log(modelId, modelTexturesId);
 		let json = {}
 		const modelList = await getModelList();
 		let modelName = modelIdToName(modelList, modelId);
-		console.log(modelName);
 
 		if (Array.isArray(modelName)) {
 			modelName = modelTexturesId > 0 && modelTexturesId <= modelName.length ? modelName[modelTexturesId - 1] : modelName[0];
