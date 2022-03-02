@@ -1,6 +1,5 @@
 # Live2D API ( NodeJS 实现 )
 感谢：https://github.com/fghrsh/live2d_api
-支持部署 Vercel
 
 ## Live2D API
 
@@ -8,7 +7,7 @@ Live2D 看板娘插件 ( https://www.fghrsh.net/post/123.html ) 上使用的后�
 
 ### 特性
 
--   原生 PHP 开发，无需伪静态，开箱即用
+-   NodeJS 开发，无需服务器，支持直接部署 Vercel Serverless
 -   支持 模型、皮肤 的 顺序切换 和 随机切换
 -   支持 单模型 单皮肤 切换、多组皮肤 递归穷举
 -   支持 同分组 多个模型 或 多个路径 的 加载切换
@@ -16,28 +15,32 @@ Live2D 看板娘插件 ( https://www.fghrsh.net/post/123.html ) 上使用的后�
 ## 使用
 
 ### 环境要求
--   PHP 版本 >= 5.2
--   依赖 PHP 扩展：json
+-   NodeJS 版本 >= 15.1.6
 
 ### 目录结构
 
 ```shell
-│  model_list.json              // 模型列表
-│
-├─model                         // 模型路径
-│  └─GroupName                  // 模组分组
-│      └─ModelName              // 模型名称
-│
-├─add                           // 更新皮肤列表
-├─get                           // 获取模型配置
-├─rand                          // 随机切换模型
-├─rand_textures                 // 随机切换皮肤
-├─switch                        // 顺序切换模型
-├─switch_textures               // 顺序切换皮肤
-└─tools
-        modelList.php           // 列出模型列表
-        modelTextures.php       // 列出皮肤列表
-        name-to-lower.php       // 文件名格式化
+├── model                      // 模型路径
+│   ├── GroupName              // 模组分组
+│   │   └── ModelName          // 模型名称
+├── LICENSE
+├── README.md
+├── api
+│   └── serverless.js           // fastify 部署 vercel 文件
+├── app.js                      // 入口
+├── model_list.json             // 模型列表
+├── package.json
+├── pnpm-lock.yaml
+├── routes
+│   ├── get.js                   // 获取模型配置
+│   ├── rand.js                  // 随机切换模型
+│   ├── randTextures.js          // 随机切换皮肤
+│   ├── root.js
+│   ├── switch.js                // 顺序切换模型
+│   └── switchTextures.js        // 顺序切换皮肤
+├── tools
+│   └── utils.js                 // 模型，皮肤列表工具
+└── vercel.json                  // vercel 部署文件
 ```
 
 ### 添加模型
@@ -164,7 +167,6 @@ model_list.json
 ```
 
 ### 接口用法
--   `/add/` - 检测 新增皮肤 并更新 缓存列表
 -   `/get/?id=1-23` 获取 分组 1 的 第 23 号 皮肤
 -   `/rand/?id=1` 根据 上一分组 随机切换
 -   `/switch/?id=1` 根据 上一分组 顺序切换
@@ -177,4 +179,4 @@ model_list.json
 
 **API 内所有模型 版权均属于原作者，仅供研究学习，不得用于商业用途**
 
-MIT © FGHRSH
+MIT © FGHRSH, GEEKAVEN
