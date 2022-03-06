@@ -1,5 +1,6 @@
 # Live2D API ( NodeJS 实现 )
 感谢：https://github.com/fghrsh/live2d_api
+魔改目的支持直接部署 Vercel Serverless
 
 ## Live2D API
 
